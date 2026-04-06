@@ -34,7 +34,8 @@ def test_russian_text(registration):
     repo_page = RepoPage(driver)
     driver.get("https://github.com/new")
     repo_page.new_text("Текст")
-    text = driver.find_element(By.CSS_SELECTOR, "span[class*='ValidationText']").text
+    text = driver.find_element(By.CSS_SELECTOR,
+                               "span[class*='ValidationText']").text
     assert "Your new repository will be created as " in text
 
 

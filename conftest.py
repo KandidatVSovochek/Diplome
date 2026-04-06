@@ -3,14 +3,14 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
 
 # запуск chrome
+
+
 @pytest.fixture(scope="session")
 def driver():
     service = ChromeService(ChromeDriverManager().install())
@@ -20,6 +20,8 @@ def driver():
     driver.quit()
 
 # регистрация
+
+
 @pytest.fixture(scope="session")
 def registration(driver):
     driver.get("https://github.com/login")
@@ -29,6 +31,8 @@ def registration(driver):
     yield driver
 
 # раздел с pull requests
+
+
 @pytest.fixture(scope="session")
 def pull_req(registration):
     driver = registration
