@@ -39,3 +39,10 @@ def pull_req(registration):
     driver.get("https://github.com/KandidatVSovochek/HW")
     driver.get("https://github.com/KandidatVSovochek/HW/pulls")
     yield driver
+
+# базовый url для API
+
+
+@pytest.fixture(scope="session")
+def base_url():
+    return "https://api.github.com"

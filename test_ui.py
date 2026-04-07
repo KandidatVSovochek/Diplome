@@ -15,7 +15,9 @@ def test_text_under_input_field_green(registration):
     color_text = repo_page.text_green()
     rgb_values = re.findall(r'\d+', color_text)
     r, g, b = map(int, rgb_values[:3])
-    assert g > r and g > b and g > 120, f"Цвет {color_text} не похож на зеленый"
+    assert (
+        g > r and g > b and g > 120
+        ), f"Цвет {color_text} не похож на зеленый"
 
 
 def test_text_under_input_field_red(registration):
@@ -26,7 +28,9 @@ def test_text_under_input_field_red(registration):
     color_text = repo_page.text_red()
     rgb_values = re.findall(r'\d+', color_text)
     r, g, b = map(int, rgb_values[:3])
-    assert r > g and r > b and r > 140, f"Цвет {color_text} не похож на красный"
+    assert (
+        r > g and r > b and r > 140
+        ), f"Цвет {color_text} не похож на красный"
 
 
 def test_russian_text(registration):
@@ -45,7 +49,9 @@ def test_open_pullreqest(pull_req):
     color_element = pull_page.green_element()
     rgb_values = re.findall(r'\d+', color_element)
     r, g, b = map(int, rgb_values[:3])
-    assert g > r and g > b and g > 120, f"Цвет {color_element} не похож на зеленый"
+    assert (
+        g > r and g > b and g > 120
+        ), f"Цвет {color_element} не похож на зеленый"
 
 
 def test_close_pullreqest(pull_req):
@@ -54,4 +60,6 @@ def test_close_pullreqest(pull_req):
     color_element = pull_page.red_element()
     rgb_values = re.findall(r'\d+', color_element)
     r, g, b = map(int, rgb_values[:3])
-    assert r > g and r > b and r > 120, f"Цвет {color_element} не похож на красный"
+    assert (
+        r > g and r > b and r > 120
+        ), f"Цвет {color_element} не похож на красный"

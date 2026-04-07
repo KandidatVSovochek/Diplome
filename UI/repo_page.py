@@ -19,7 +19,6 @@ class RepoPage:
         element = self.driver.find_element(*self.error_message)
         return element.value_of_css_property("color")
 
-
 # проверка для правильного названия
     def text_green(self):
         element = self.driver.find_element(*self.not_error_message)
