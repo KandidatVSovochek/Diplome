@@ -1,4 +1,5 @@
 import allure
+import pytest
 from UI.repo_page import RepoPage
 from UI.pull_page import Pull_req
 from selenium.webdriver.common.by import By
@@ -14,6 +15,7 @@ load_dotenv()
                     "репозитория, которое не занято в аккаунте")
 @allure.feature("UI")
 @allure.severity("NORMAL")
+@pytest.mark.UI
 def test_text_under_input_field_green(registration):
     with allure.step("Перейти на сайт GitHub и зарегистрироваться"):
         driver = registration
@@ -38,6 +40,7 @@ def test_text_under_input_field_green(registration):
                     "репозитория, которое занято в аккаунте")
 @allure.feature("UI")
 @allure.severity("NORMAL")
+@pytest.mark.UI
 def test_text_under_input_field_red(registration):
     with allure.step("Перейти на сайт GitHub и зарегистрироваться"):
         driver = registration
@@ -63,6 +66,7 @@ def test_text_under_input_field_red(registration):
                     "при вводе названия на русском языке")
 @allure.feature("UI")
 @allure.severity("NORMAL")
+@pytest.mark.UI
 def test_russian_text(registration):
     with allure.step("Перейти на сайт GitHub и зарегистрироваться"):
         driver = registration
@@ -81,6 +85,7 @@ def test_russian_text(registration):
 @allure.description("Проверка цвета значка открытого pull request")
 @allure.feature("UI")
 @allure.severity("minor")
+@pytest.mark.UI
 def test_open_pullrequest(pull_req):
     with allure.step("Перейти на сайт GitHub, зарегистрироваться,"
                      "перейти на страницу репозитория"):
@@ -100,6 +105,7 @@ def test_open_pullrequest(pull_req):
 @allure.description("Проверка цвета значка закрытого pull request")
 @allure.feature("UI")
 @allure.severity("minor")
+@pytest.mark.UI
 def test_close_pullrequest(pull_req):
     with allure.step("Перейти на сайт GitHub, зарегистрироваться,"
                      "перейти на страницу репозитория"):
