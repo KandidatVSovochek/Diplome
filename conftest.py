@@ -3,12 +3,11 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
+
 
 # запуск chrome
 @pytest.fixture(scope="session")
@@ -19,6 +18,7 @@ def driver():
     yield driver
     driver.quit()
 
+
 # регистрация
 @pytest.fixture(scope="session")
 def registration(driver):
@@ -28,6 +28,7 @@ def registration(driver):
     driver.find_element(By.NAME, "commit").click()
     yield driver
 
+
 # раздел с pull requests
 @pytest.fixture(scope="session")
 def pull_req(registration):
@@ -35,3 +36,46 @@ def pull_req(registration):
     driver.get("https://github.com/KandidatVSovochek/HW")
     driver.get("https://github.com/KandidatVSovochek/HW/pulls")
     yield driver
+
+
+# базовый url для API
+@pytest.fixture(scope="session")
+def base_url():
+    return "https://api.github.com"
+
+
+# owner
+@pytest.fixture(scope="session")
+def owner():
+    owner = os.getenv("OWNER")
+    return owner
+
+
+# repo_name
+@pytest.fixture(scope="session")
+def repo_name():
+    repo_name = os.getenv("REPO_NAME")
+    return repo_name
+
+
+# headers
+@pytest.fixture(scope="session")
+def headers():
+    token = os.getenv("API_KEY")
+    headers = {"accept": "application/vnd.github+json",
+               "authorization": f"Bearer {token}"}
+    return headers
+
+
+# тело JSON конструктор
+@pytest.fixture(scope="session")
+def make_body():
+    def make(name="Default", description="Description", private=True):
+        return {
+            "name": name,
+            "description": description,
+            "homepage": "https://github.com",
+            "private": private,
+            "is_template": True
+        }
+    return make
