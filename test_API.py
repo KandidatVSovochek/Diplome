@@ -28,6 +28,15 @@ def test_create_repository(base_url, headers, repo_name, make_body):
 @allure.severity("critical")
 @pytest.mark.API
 def test_delete_repository(base_url, headers, owner, repo_name):
+    with allure.step("Отправить get запрос на сервер"
+                     "на существование репозитрия"):
+        check_resp = requests.get(f"{base_url}/repos/{owner}/{repo_name}",
+                                  headers=headers)
+        if check_resp.status_code == 404:
+            pytest.skip(
+                f"Репозиторий {repo_name} не найден, "
+                "удаление не требуется"
+            )
     with allure.step("Отправить delete запрос на сервер"
                      "на удаление репозитрия"):
         resp = requests.delete(f"{base_url}/repos/{owner}/{repo_name}",
