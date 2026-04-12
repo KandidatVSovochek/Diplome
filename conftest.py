@@ -31,10 +31,10 @@ def registration(driver):
 
 # раздел с pull requests
 @pytest.fixture(scope="session")
-def pull_req(registration):
+def pull_req(registration, owner):
     driver = registration
-    driver.get("https://github.com/KandidatVSovochek/HW")
-    driver.get("https://github.com/KandidatVSovochek/HW/pulls")
+    driver.get(f"https://github.com/{owner}/HW")
+    driver.get(f"https://github.com/{owner}/HW/pulls")
     yield driver
 
 
